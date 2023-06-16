@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row text-center  banner"id="c1"> 
+<div class="col-md-12" >
+<h1>MY COMMENTS</h1>
+<a href="/home/">Home / </a>
+<a href="/about/">Comments / </a>
+</div>
+</div>
+<div class="row padding " >
+<table class="table table-bordered">
+<tr class="bg-primary">
+<th>ID</th>
+<th>Message</th>
+<th>News</th>
+<th>Delete</th>
+<th>Edit</th>
+</tr>
+{% for comment in comm %}
+<tr>
+<td>{{ forloop.counter }}</td>
+<td>{{ comment.comment }}</td>
+<td>{{ comment.newsid.title }}</td>
+<td><a href="/delete/{{ comment.id }}"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+<td><a href="/edit/{{ comment.id }}"><button class="btn btn-warning btn-sm">Edit</button></a></td>
+</tr>
+{% endfor %}
+</table>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="row text-center padding " >
+<div class="col-md-12" >
+<h1>LOGIN</h1>
+<a href="/home/">Home / </a>
+<a href="/login/">Login / </a>
+</div>
+</div>
+<div class="row padding" id="lg">
+
+<div class="container">
+<div class="col-md-6 col-md-offset-3">
+<form method="post" class="loginform">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" class="btn btn-warning" value="LOGIN" />
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

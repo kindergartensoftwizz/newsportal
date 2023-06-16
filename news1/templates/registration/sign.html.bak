@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="row text-center  banner"  >
+<div class="col-md-12" >
+<h1>REGISTER NOW</h1>
+<p><a href="/home/">Home / </a>
+<a href="/sign/">New Registration </a></p>
+</div>
+</div>
+<div class="row padding" id="sg">
+
+<div class="container">
+<div class="col-md-6 col-md-offset-3">
+<form method="post" class="loginform">
+{% csrf_token %}
+{% for field in form %}
+{{ field.label_tag }}
+{{ field }}
+<br>
+{% for error in field.errors %}
+<p style="color:red;">{{ error }}</p>
+{% endfor %}
+{% endfor %}
+<input type="submit" class="btn btn-warning" value="REGISTER" />
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="imagebg row">
+<h1 class="text-center"> {{ catobject.name }}</h1>
+
+</div>
+<div class="row " style="margin-top: 50px">
+
+<div class="col-md-10 col-md-offset-1 news1">
+
+{% for news in newsobject %}
+<div class="col-md-4">
+<div class="col-md-12 newsdiv bg-info">
+<a href="/detailnews/{{ news.id }}">
+    <h3>{{ news.title|slice:"0:50" }}...</h3>
+<img src="/media/{{ news.image }}" height="300" width="100%" />
+
+<br>
+
+</a>
+</div>
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

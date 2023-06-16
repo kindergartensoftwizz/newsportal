@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="imagebg row">
+<h1 class="text-center"> News</h1>
+
+</div>
+<div class="row " style="margin-top: 50px">
+
+<div class="col-md-9 news">
+
+
+
+<div class="col-md-12 ">
+<h1>{{ newsobject.title }}</h1>
+<img src="/media/{{ newsobject.image }}" height="400" width="100%" />
+<span >-- By{{ newsobject.postby }}</span>
+<span >&nbsp; on {{ newsobject.poston }}</span>
+<p>{{ newsobject.description|safe }}</p>
+<br>
+
+</div>
+</div>
+
+<div class="col-md-3 padding ">
+    <div class="col-md-12 newsdiv padding">
+        <h4>User Comments</h4>
+        {% if user.is_authenticated %}
+<form action="/insertcomment/" method="post">
+    {% csrf_token %}
+    <label>Post your comment</label>
+    <textarea class="form-control" placeholder="Comment" name="comment"></textarea>
+    <br>
+    <input type="hidden" name="userid" value="{{ user.id }}" />
+    <input type="hidden" name="newsid" value="{{ newsobject.id }}" />
+    <button class="btn btn-info">POST</button>
+</form>
+{% else %}
+<a href="/login/?next={{ request.path }}">Login to post your comment</a>
+{% endif %}
+{% for c in com %}
+<div style="border-bottom:1px solid black;">
+<h5><i class="fa fa-comment text-info"></i> {{ c.comment }}</h5>
+<h6 class="text-danger">-- {{ c.userid.first_name }} {{ c.userid.last_name }}</h6>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+
+
+{% endblock %}

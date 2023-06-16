@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<style>
+#slider {
+    height:350px;
+    width:70%;
+	margin:auto;
+    overflow:hidden;
+    background:#CCC;
+}
+
+.slide {
+    height:350px;
+    float:left;
+    text-align:center;
+    border:1PX SOLID #000;
+	line-height:8em;
+	font-size:40px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    //you can set this, as long as it's not greater than the slides length
+    var show = 3;
+    var w = $('#slider').width() / show;
+    var l = $('.slide').length;
+    
+    $('.slide').width(w);
+    $('#slide-container').width(w * l)
+    
+    function slider() {
+        $('.slide:first-child').animate({
+            marginLeft: -w
+        }, 'slow', function () {
+            $(this).appendTo($(this).parent()).css({marginLeft: 0});
+        });
+    }
+    var timer = setInterval(slider, 2000);
+    
+    $('#slider').hover(function(){
+        clearInterval(timer);
+    },function(){
+        timer = setInterval(slider, 2000);
+    });
+});
+</script>
+</head>
+
+<body background="../background2.png">
+<h1 style="text-align:center; margin-top:60px; color:#fff; font-size:60px">Slider</h1>
+<div id="slider">
+    <div id="slide-container">
+        <div class="slide">Slide 1</div>
+        <div class="slide">Slide 2</div>
+        <div class="slide">Slide 3</div>
+        <div class="slide">Slide 4</div>
+        <div class="slide">Slide 5</div>
+        <div class="slide">Slide 6</div>
+    </div>
+</div>
+</body>
+</html>

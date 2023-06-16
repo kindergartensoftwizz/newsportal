@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row text-center  banner"id="c1"> 
+<div class="col-md-12" >
+<h1>MY COMMENTS</h1>
+<a href="/home/">Home / </a>
+<a href="">Edit Comments / </a>
+</div>
+</div>
+<div class="row padding40">
+
+<div class="col-md-8 col-md-offset-2">
+<h3>Comment</h3>
+<form action="/updatecomment/{{ com.id }}" method="post">
+{% csrf_token %}
+<textarea name="comment" class="form-control"
+ placeholder="Enter your comment">{{ com.comment }}</textarea>
+<br>
+<input type="hidden" name="userid" value="{{ user.id }}" />
+<input type="hidden" name="newsid" value="{{ com.newsid_id }}" />
+<input type="submit" class="btn btn-warning" />
+</form>
+
+
+</div>
+
+</div>
+{% endblock %}

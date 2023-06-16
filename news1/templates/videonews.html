@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="imagebg row">
+<h1 class="text-center"> {{ catobj.name}}</h1>
+
+</div>
+<div class="row " style="margin-top: 50px">
+
+<div class="col-md-10 col-md-offset-1 news">
+
+{% for v in video %}
+<div class="col-md-6">
+<div class="col-md-12 newsdiv">
+<h1>{{ v.title }}</h1>
+
+
+<p>{{ v.categoryid.name }}</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ v.link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<br>
+
+</div>
+</div>
+{% endfor %}
+
+
+</div>
+
+</div>
+
+{% endblock %}

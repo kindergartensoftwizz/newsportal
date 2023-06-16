@@ -1,0 +1,220 @@
+{% load static %}
+
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>News Portal</title>
+<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css" rel="stylesheet" />
+<link href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" type="text/css" rel="stylesheet" />
+<link href="{% static 'style.css' %}" type="text/css" rel="stylesheet"/>
+<script src="{% static 'bootstrap/jquery.js' %}"></script>
+<script src="{% static 'bootstrap/bootstrap.js' %}"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+<div class="col-md-14">
+<div class="row" id="header">
+<div class="col-md-3">
+<h3>{% now "jS F Y l" %}</h3>
+</div>
+<div class="col-md-6">
+<nav class="navbar-inverse" id="nav">
+<ul class="nav navbar-nav">
+<li><a href="/about/">About</a></li>
+<li><a href="/contact">Contact Us</a></li>
+{% if user.is_authenticated %}
+<li><a href="javascript:void(0)" class="login">Hi, {{ user.username }}</a></li>
+<li><a href="/comment/{{ user.id }}" class="login">View Comments</a></li>
+<li><a href="/addnews/" class="login">Add News</a></li>
+<li><a href="/logout/" class="login">Logout</a></li>
+{% else %}
+<li><a href="/login/?next=/addnews/" class="login">Add News</a></li>
+<li><a href="/login/" class="login">Login</a> </li>
+<li><a href="/sign/" class="login">Register</a></li>
+{% endif %}
+</ul>
+</nav>
+</div>
+</div>
+
+
+
+
+<br>
+
+<div class="row text-center" id="wedo" >
+<div class="col-md-12">
+<div class="col-md-4">
+<div class="col-md-12 threedivs">
+  <img src="{% static 'portal.png' %}"  width="85%" />	
+</div>
+</div>
+
+<div class="col-md-8">
+<div class="col-md-12 threedivs">
+ <img src="{% static 'portal2.jpg' %}"  width="85%" />	
+
+</div> 
+</div>
+</div>
+</div>
+
+
+<br>
+
+
+
+
+<div class="row" id="header">
+<div class="col-md-12">
+<div class="col-md-3">
+</div>
+<div class="col-md-10">
+<nav class="navbar-inverse" id="nav">
+<ul class="nav navbar-nav">
+<li><a href="/newsportal"><span class="glyphicon glyphicon-home"></span></a></li>
+{% for category in cat %}
+<li><a href="/newsdetail/{{ category.id }}">{{ category }}</a></li>
+{% endfor %}
+
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Videos
+  <span class="caret"></span></a>
+  <ul class="dropdown-menu bg-info">
+    {% for category in cat %}
+    <li style="background: RGB(10, 141, 161);"><a  href="/videonews/{{ category.id }}">{{ category }}</a></li>
+    {% endfor %}
+    
+  </ul>
+</li>
+
+<!--<li><a href="#">POLITICAL</a></li>
+<li><a href="#">TECHNOLOGY</a></li>
+<li><a href="#">FORIEGN & COUNTRY</a></li>
+<li><a href="#">BUSINESS</a></li>
+<li><a href="#">LIFESTYLE</a></li>
+
+
+
+<li><a href="#">ENTERTAINMENT</a></li>
+<li><a href="#">SPORTS</a></li>
+<li><a href="#">JOBS</a></li>
+<li><a href="#">Covid-19</a></li>-->
+
+
+
+<!--li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li-->
+
+</ul>
+</nav>
+</div>
+</div>
+</div>
+
+
+
+{% block content %}
+{% endblock %}
+
+
+
+
+
+
+<div class="row" id="new">
+<div class="col-md-12">
+
+<div class="row">
+<div class="col-md-4">
+<h3 class="heading6">CATEGORIES</h3>
+
+
+<ul class="list">
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> FASHION</a></li>
+<br>
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> TECH</a></li>
+<br>
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> LIFE STYLE</a></li>
+<br>
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> TRAVAL</a></li>
+<br>
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> FEATURES</a></li>
+<br>
+
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> TUTORIALS</a></li>
+<br>
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Covid-19</a></li>
+
+</ul>
+</div>
+
+
+<div class="col-md-4">
+<h3 class="heading6">LATEST NEWS</h3>
+
+
+<div class="row">
+<div class="row high">
+<div class="col-md-6">
+<img src="{% static 'dance1.jpg' %}" height="100px" width="100%"  />
+</div>
+<div class="col-md-6">
+<h4><b>Art Exhibition Going To Start This Week</b></h4>
+<p>Date</p>
+</div>
+</div>
+</div>
+
+
+<div class="row high">
+<div class="col-md-6">
+<img src="{% static 'music1.jpg' %}" height="100px" width="100%"  />
+</div>
+<div class="col-md-6">
+<h4><b>Grand Live Concert In Germany 2019</b></h4>
+<p>Date</p>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="col-md-4">
+<h3 class="heading6">META</h3>
+
+<ul class="list">
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Login</a></li>
+<br>
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Entries feed</a></li>
+<br>
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> comments feed</a></li>
+<br>
+<li><a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Wordpress</a></li>
+
+</ul>
+</div>
+</div>
+
+
+
+<div class="row" id="last">
+<div class="col-md-12">  
+<h3 class="heading5">News Portal | &copy; Copyright. All Rights Reserved</h3>
+</div>
+</div>
+</div>
+
+ </div> 
+</div>
+</div>
+</body>
+</html>
+<script>
+  $(document).ready(function(){
+      $(".loginform input").addClass("form-control");
+  });
+</script>

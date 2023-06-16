@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="imagebg">
+    <h3> Add News</h3>
+</div>
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
+<div class="row " style="margin-top: 50px">
+<div class="col-md-6 col-md-offset-3 form-container">
+<h2>Enter below details:</h2>
+
+<form role="form" method="post" id="reused_form" action="/insertnews/" enctype="multipart/form-data" >
+{% csrf_token %}
+
+<label>Select Category</label>
+<select class="form-control" name="category">
+<option value="">-Select-</option>
+{% for c in cat %}
+<option value="{{ c.id }}">{{ c.name }}</option>
+{% endfor %}
+</select>
+<br>
+<label>Title</label>
+<input type="text" class="form-control" name="title" />
+<br>
+<label>Description</label>
+<textarea class="form-control" name="description"></textarea>
+<br>
+<label>Upload Image</label>
+<input type="file" class="form-control" name="image" />
+<br>
+<label>Post By</label>
+<input type="text" class="form-control" name="postby" value="{{ user.first_name }}" />
+<br>
+<label>Post On</label>
+<input type="date" class="form-control" name="poston" id="poston" />
+<br>
+<label>Set a Tag</label>
+<select class="form-control" name="tag">
+    <option value="">-Select-</option>
+    <option>new</option>
+    <option>Breaking</option>
+    <option>recent</option>
+    <option>latest</option>
+</select>
+<br>
+<input type="hidden" class="form-control" name="userid" value="{{ user.id }}" />
+<input type="hidden" class="form-control" name="status" value="inactive" />
+<br>
+<div class="row">
+<div class="col-sm-12 form-group">
+<button type="submit" class="btn btn-info btn-block" >Submit </button>
+</div>
+</div>
+
+</form>
+
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+ var now = new Date();
+
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+$('#poston').val(today);
+});
+</script>
+{% endblock %}
